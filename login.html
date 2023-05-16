@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/style-1.css">
+
+ <title>logIN-form</title>
+</head>
+<body>
+	<img src="images/linkedin-logo.jpg" alt="linked in logo" class="logo">
+	<div class="sign_in">
+		<h2>Sign in</h2>
+		<p class="heading">Stay updated on your personal world</p>
+		
+		<p class="error">invalid input</p>
+		
+		<div class="form_group">
+		<input type="text" name="user_name" placeholder="Email or phone" class="form_control" id="mail"/>
+		
+		<p class="error_msg">please enter your email or phone</p>
+        </div>
+		<div class="form_group">
+			<input type="password" name="password"  placeholder="Password" id="passwrd" class="form_control"/>
+			<span class="visible">show</span>
+			
+		<p class="error_msg">please enter your password</p>
+        <p class ="error_msg">enter correct password</p>
+
+		</div>
+		<a href="#">Forgot password?</a>
+		<button type="button" onclick="onSignIn()" class="btn_1">Sign in</button>
+        <p class="error_msg">please enter your password</p>
+
+        <div class="login-or">
+		<div class="login-option"></div>
+		<span class="login-choice">or</span>
+	     </div>
+		<button type="button"  class="btn_2"><p>New to LinkedIn? Join now</p></button>
+	</div>
+	
+	<script src="js/object.js"></script>
+	
+
+</body>
+</html>
