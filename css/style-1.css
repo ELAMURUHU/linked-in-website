@@ -64,6 +64,7 @@ body{
     
 	font-size:13px;
 	color:#0072b1;
+	cursor:pointer;
 }
 .password{
 	margin-top:20px;
@@ -1094,11 +1095,11 @@ font-size:14px;
 }
 
 .uploaded-image{
-	width:300px;
-	height:300px;
-	margin-top:100px;
+	width:245px;
+	height:190px;
+	margin-top:15px;
 	
-    margin-left: 128px;
+    margin-left:5px;
 }
 	/*user post section ends*/
 	
@@ -1914,3 +1915,100 @@ font-size:14px;
 	border-radius:15px;
 	
 }
+
+
+
+/*post content starts*/
+.post-content {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.post-text {
+  margin-bottom: 10px;
+}
+
+.post-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+/*post content ends*/
+
+
+
+
+
+
+
+
+
+
+
+/* Your existing CSS styles */
+
+
+
+
+
+.whole-content-show{
+	margin-top:80px;
+	border: 1px solid black;
+    padding: 10px 35px;
+    text-align: center;
+}
+.expose{
+/* 	border: 1px solid lightgray; */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+}
+
+
+
+
+
+
+
+#post-container
+        {
+			/* width: 500px; */
+			margin: 0 auto;
+			padding-top: 20px;
+		}
+		
+.posts{
+	  background: #fff;
+	  margin-bottom: 10px;
+	  border-radius: 5px;
+	  box-shadow: 0 2px  10px #ccc;
+    }
+		.post-user-info{
+			padding: 10px 15px;
+		}
+		.post-img > img{
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+		.post-txt{
+			padding: 10px 15px;
+		}
+		
+		.post-info{
+			padding: 10px 10px;
+		}
+		
+		.post-actions{
+			display: flex;
+    justify-content: space-around;
+    padding-top: 25px;
+		}
+		
+		
+ /* form validation */

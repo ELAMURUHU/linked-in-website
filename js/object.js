@@ -239,7 +239,7 @@ if(getUrl.includes("index.html")){
 
 
 //edit intro show function
-if(getUrl.includes("profile.html")){
+ if(getUrl.includes("profile.html")){
 let btn = document.getElementsByClassName("editable");
 for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", function (event) {
@@ -253,9 +253,54 @@ for (let i = 0; i < btn.length; i++) {
 	
   });
 }
+} 
+/* // Get the form elements
+const firstNameInput = document.getElementById('fname');
+const lastNameInput = document.getElementById('lname');
+const additionalNameInput = document.getElementById('ffname');
+const roleInput = document.getElementById('role');
+const cityInput = document.getElementById('city');
+const stateInput = document.getElementById('state');
+const countryInput = document.getElementById('cntry');
+
+// Get the form and overlay elements
+const form = document.querySelector('.edit-intro-section');
+const overlay = document.querySelector('.overlay');
+
+// Function to update the form values
+function updateFormValues() {
+  // Get the updated values from the input fields
+  const updatedFirstName = firstNameInput.value;
+  const updatedLastName = lastNameInput.value;
+  const updatedAdditionalName = additionalNameInput.value;
+  const updatedRole = roleInput.value;
+  const updatedCity = cityInput.value;
+  const updatedState = stateInput.value;
+  const updatedCountry = countryInput.value;
+
+  // Perform any necessary processing or validation with the updated values
+
+  // Update the form values with the updated values
+  firstNameInput.value = updatedFirstName;
+  lastNameInput.value = updatedLastName;
+  additionalNameInput.value = updatedAdditionalName;
+  roleInput.value = updatedRole;
+  cityInput.value = updatedCity;
+  stateInput.value = updatedState;
+  countryInput.value = updatedCountry;
+
+  
+  form.style.display = 'none';
+  overlay.style.display = 'none';
 }
+
+
+const saveBtn = document.getElementById('saved-btn');
+saveBtn.addEventListener('click', updateFormValues);
+ */
+
 //edit intro remove function
- let editBtn = document.getElementsByClassName("edit-icon");
+  let editBtn = document.getElementsByClassName("edit-icon");
  for(let k=0; k  <editBtn.length; k++){
 editBtn[k].addEventListener("click",function(event){
 	event.preventDefault();
@@ -265,7 +310,7 @@ editBtn[k].addEventListener("click",function(event){
 	
 	 getparent.style.display="none";
 }) 
- }
+ } 
 
 //education show function
 let icon = document.getElementsByClassName("edu-pencil-icon");
@@ -371,27 +416,22 @@ myInputCountry.value = editCountry;
  
  
  
- 
+ /*********************************************************************************************/
 // Create an object to hold the form data
 
 const saveButton = document.getElementById("saved-btn");
+
+
 saveButton.addEventListener("click", function() {
-	const firstNames = document.getElementById('fname');
-	const lastNames = document.getElementById('lname');
-	const additionalNames = document.getElementById('ffname');
-	const roles = document.getElementById('role');
-	const citys = document.getElementById('city');
-	const states = document.getElementById('state');
-	const countrys = document.getElementById('cntry');
 	
-  const firstName = firstNames.value;
-  const lastName = lastNames.value;
-  const additionalName = additionalNames.value;
-  const role = roles.value;
-  const city = citys.value;
-  const state = states.value;
-  const country = countrys.value;
-  
+	const firstName = document.getElementById('fname').value;
+	const lastName = document.getElementById('lname').value;
+	const additionalName = document.getElementById('ffname').value;
+	const role = document.getElementById('role').value;
+	const city = document.getElementById('city').value;
+	const state = document.getElementById('state').value;
+	const country = document.getElementById('cntry').value;
+	
 	const formData = {
 	  firstName,
 	  lastName,
@@ -402,38 +442,46 @@ saveButton.addEventListener("click", function() {
 	  country
 	};
 
-// Save form data to local storage
-localStorage.setItem('formData', JSON.stringify(formData));
+	// Save form data to local storage
+	localStorage.setItem('formData', JSON.stringify(formData));
+	
+	updateDisplayedValues(formData);
+	
+	let imagineEditIntro = document.getElementsByClassName('edit-intro-section');
+	imagineEditIntro[0].style.display="none";
+	
+	let imagineOverlayIntro = document.getElementsByClassName('overlay');
+	imagineOverlayIntro[0].style.display="none";
 });
 
+
 const myObject = JSON.parse(localStorage.getItem('formData'));
-//console.log(myObject);
-if(myObject){
-	  let myName = document.getElementById("ela-name");
-	 myName.innerText = myObject.firstName; 
-	 
-	 let myLastName = document.getElementById("last-name");
-	 myLastName.innerText = myObject.lastName;
-	 
-	 let myJob = document.getElementById("ela-role");
-	 myJob.innerText = myObject.role;
-	 
-	  let myCity = document.getElementById("my-city");
-	 myCity.innerText = myObject.city;
-	 
-	 let myState = document.getElementById("my-state");
-	 myState.innerText = myObject.state;
-	 
-	 let myCountry = document.getElementById("my-country");
-	 myCountry.innerText = myObject.country;
-	 
+if (myObject) {
+	updateDisplayedValues(myObject);
 }
-	 
+
+
+function updateDisplayedValues(formData) {
+	document.getElementById("ela-name").innerText = formData.firstName;
+	document.getElementById("last-name").innerText = formData.lastName;
+	document.getElementById("ela-role").innerText = formData.role;
+	document.getElementById("my-city").innerText = formData.city;
+	document.getElementById("my-state").innerText = formData.state;
+	document.getElementById("my-country").innerText = formData.country;
+}
+
+
+
+	
 
 }
+/************************************************************************************************************/
+
 
 
 /*post section starts*/
+
+
 if(getUrl.includes("index.html")){
 let postBtn = document.getElementById("start-a-post");
 //console.log(postBtn); 
@@ -449,35 +497,279 @@ let postBtn = document.getElementById("start-a-post");
 }
 /*post section ends*/
 
+
+
+
 /*image show starts*/
  
-let fileInput = document.getElementById('myFileInput');
+ if(getUrl.includes("index.html")){
+ let fileInput = document.getElementById('myFileInput');
+let postDescriptionTextarea = document.getElementById('nw-pst-des');
 
 // Get selected file
 fileInput.addEventListener('change', function(event) {
   let file = event.target.files[0]; 
 
-  console.log(file);
   // FileReader object to read the file
   let reader = new FileReader();
-   console.log(reader);
-   
-  //FileReader onload event
-    reader.onload = function(e) {
+
+  // FileReader onload event
+  reader.onload = function(e) {
     let imageSrc = e.target.result; // Get the image source data
 
     // Create an image element to display the selected image
     let imageElement = document.createElement('img');
     imageElement.src = imageSrc;
-    imageElement.classList.add('uploaded-image'); // Add a class for styling if needed
+    imageElement.classList.add('uploaded-image'); 
 
-    // Get the post-part container element to display the uploaded image
-    let postContainer = document.querySelector('.image-show');
+    
+    let postContainer = document.getElementById('img-shw');
     postContainer.innerHTML = ''; // Clear any existing content
     postContainer.appendChild(imageElement); // Append the image to the container
   };
 
-  // Read the selected file as a data URL
+  // read file as a data URL
   reader.readAsDataURL(file);
 });
-/*image show ends*/
+
+
+}
+
+
+// Show the content of the textarea and the selected image
+/* if(getUrl.includes("index.html")){
+	
+	// Call the showContent function when the "Post" button is clicked
+let postButton = document.getElementById('snd-pst-btn');
+postButton.addEventListener('click', function () {
+  showContent();
+
+  
+  
+});
+function showContent() {
+	event.preventDefault();
+  let postContent = postDescriptionTextarea.value;
+  let selectedImage = document.querySelector('.image-show img');
+   console.log(selectedImage);
+  let wholeContentShowDiv = document.getElementById('whol-con-shw');
+  wholeContentShowDiv.innerHTML = '';
+
+  if (postContent.trim() !== '') {
+    let contentParagraph = document.createElement('p');
+    contentParagraph.textContent = postContent;
+    wholeContentShowDiv.appendChild(contentParagraph);
+  }
+
+  if (selectedImage) {
+    let clonedImage = selectedImage.cloneNode(true);
+    wholeContentShowDiv.appendChild(clonedImage);
+  }
+
+  
+  let postSectionDiv = document.getElementById('post-box');
+  postSectionDiv.style.display = 'none';
+
+  
+  let overlay = document.getElementById('ovrlay');
+  overlay.style.display = 'none';
+
+  // Store the post content and selected image source in sessionStorage
+  sessionStorage.setItem('postContent', postContent);
+  if (selectedImage) {
+    sessionStorage.setItem('selectedImageSrc', selectedImage.src);
+  }
+}  */
+
+// Retrieve stored content on page load
+/* document.addEventListener('DOMContentLoaded', function () {
+  let storedPostContent = sessionStorage.getItem('postContent');
+  let storedSelectedImageSrc = sessionStorage.getItem('selectedImageSrc');
+  let wholeContentShowDiv = document.getElementById('who
+  l-con-shw');
+
+  if (storedPostContent) {
+    let contentParagraph = document.createElement('p');
+    contentParagraph.textContent = storedPostContent;
+    wholeContentShowDiv.appendChild(contentParagraph);
+  }
+
+  if (storedSelectedImageSrc) {
+    let storedImageElement = document.createElement('img');
+    storedImageElement.src = storedSelectedImageSrc;
+    storedImageElement.classList.add('uploaded-image');
+    wholeContentShowDiv.appendChild(storedImageElement);
+  }
+}); */
+
+
+
+/* } */
+
+
+
+/*new post section starts */
+
+  let userData = [
+		
+		{
+			id:"12345677",
+			userName: "Elamuruhu",
+			position:"Front End Trainee",
+		},
+		{
+			id:"12345678",
+			userName: "Vinoth K",
+			position:"Front End Developer",
+		},
+		{
+			id:"234566778",
+			userName: "LinkedIn",
+			position:"Promoted",
+		}
+	]
+	let postArr = [
+		{
+			id: "46584789sadasdaf47",
+			postText:"Here are some cool web development tricks you must try in your next project 🔥",
+			postImg:"https://media.licdn.com/dms/image/D4E22AQEdSHNzbkhvFw/feedshare-shrink_800/0/1684179604471?e=1687392000&v=beta&t=dOA7oGNq9GPJpJ62BS2k3g0HlKfxcq1_8VkWVvUlMpQ",
+			postUserId:"12345678"
+		},
+		{
+			id: "dlfkh58ghj7dd44gdfhy",
+			postText:"Update your job preferences to let recruiters know what roles you're interested in.",
+			postImg:"https://media.licdn.com/dms/image/sync/C4E18AQHvszE4UGBF2A/companyUpdate-article-image-shrink_627_1200/0/1659691176056?e=1687392000&v=beta&t=pRIst_gNpY9tp8LRpBEA5rYeR2SGRXGX2WVhiAp5Mfs",
+			postUserId:"234566778"
+		}
+	] 
+
+
+	
+
+
+
+// Get references to the necessary elements
+if(getUrl.includes("index.html")){
+ let postContainer = document.getElementById("post-container");
+let imageInput = document.getElementById("myFileInput");
+let textarea = document.getElementById("nw-pst-des");
+let postButton = document.getElementById("snd-pst-btn");
+
+
+postButton.addEventListener("click", function() {
+  
+  
+  let selectedImage = imageInput.files[0];
+  let textareaContent = textarea.value;
+  
+  let postUser = userData.find(function(user) {
+return user.id === postArr[0].postUserId;
+});
+
+  // Create HTML markup for the post
+  let postMarkup = `
+    <div class="posts">
+      <div class="post-info">
+	   <div class="post-details">
+          <p>${postUser.id}</p>
+          <p>${postUser.userName}</p>
+          <p>${postUser.position}</p>
+        </div>
+        <div class="post-txt">
+          <p>${textareaContent}</p>
+        </div>
+        <div class="post-img">
+          <img src="${URL.createObjectURL(selectedImage)}" alt="">
+        </div>
+        <div class="post-actions">
+          <div class="reviews">
+		     <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+			 <button type="button" class="review-btn">Like</button>
+		   </div>
+		   
+		   <div class="reviews">
+		     <i class="fa fa-commenting-o" aria-hidden="true"></i>
+			 <button type="button" class="review-btn">Comment</button>
+		   </div>
+		   
+		   <div class="reviews">
+		     <i class="fa fa-retweet" aria-hidden="true"></i>
+			 <button type="button" class="review-btn">Repost</button>
+		   </div>
+		   
+		   <div class="reviews">
+		     <i class="fa fa-paper-plane" aria-hidden="true"></i>
+			 <button type="button" class="review-btn">Send</button>
+		   </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Append the post markup to the post-container
+  postContainer.innerHTML += postMarkup;
+
+
+let postSectionDiv = document.getElementById('post-box');
+  postSectionDiv.style.display = 'none';
+
+  
+  let overlay = document.getElementById('ovrlay');
+  overlay.style.display = 'none';
+  // Reset the image input and textarea
+  imageInput.value = "";
+  textarea.value = "";
+}); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //to show the typing password
+if(getUrl.includes("login.html")){
+		const showPassword = document.getElementById("show-password");
+		const passwordInput = document.getElementById("passwrd");
+		
+			showPassword.addEventListener("click", function () {
+			if (passwordInput.type === "password") {
+			passwordInput.type = "text";
+			showPassword.textContent = "hide";
+			} else {
+			passwordInput.type = "password";
+			showPassword.textContent = "show";
+		    }
+		
+		});
+    }
+	
+	
+	
+// Get the Save button element
+
+
