@@ -645,111 +645,115 @@ function showContent() {
 
 
 	
+/***************posts*************************/
+if (getUrl.includes("index.html")) {
+  let postContainer = document.getElementById("post-container");
+  let imageInput = document.getElementById("myFileInput");
+  let textarea = document.getElementById("nw-pst-des");
+  let postButton = document.getElementById("snd-pst-btn");
 
+  // get existing posts from local storage or initialize an empty array
+  let storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
 
+  // Function to render posts from local storage
+  function renderPosts() {
+    postContainer.innerHTML = ""; // Clear the post container
 
-// Get references to the necessary elements
-if(getUrl.includes("index.html")){
- let postContainer = document.getElementById("post-container");
-let imageInput = document.getElementById("myFileInput");
-let textarea = document.getElementById("nw-pst-des");
-let postButton = document.getElementById("snd-pst-btn");
+    // Loop through the stored posts and create HTML markup for each post
+    storedPosts.forEach(function(post) {
+      let postUser = userData.find(function(user) {
+        return user.id === post.postUserId;
+      });
 
+      let postMarkup = `
+        <div class="posts">
+          <div class="post-info">
+            <div class="post-details">
+              <p>${postUser.id}</p>
+              <p>${postUser.userName}</p>
+              <p>${postUser.position}</p>
+            </div>
+            <div class="post-txt">
+              <p>${post.textareaContent}</p>
+            </div>
+            <div class="post-img">
+              <img src="${post.imageBase64}" alt="">
+            </div>
+            <div class="post-actions">
+              <div class="reviews">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                <button type="button" class="review-btn">Like</button>
+              </div>
+              <div class="reviews">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                <button type="button" class="review-btn">Comment</button>
+              </div>
+              <div class="reviews">
+                <i class="fa fa-retweet" aria-hidden="true"></i>
+                <button type="button" class="review-btn">Repost</button>
+              </div>
+              <div class="reviews">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                <button type="button" class="review-btn">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
 
-postButton.addEventListener("click", function() {
+      postContainer.innerHTML += postMarkup; // Append the post markup to the post-container
+    });
+  }
+
+  // Call the renderPosts function to display existing posts
+  renderPosts();
+
+  postButton.addEventListener("click", function() {
+    let selectedImage = imageInput.files[0];
+    let textareaContent = textarea.value;
+
+    let postUser = userData.find(function(user) {
+      return user.id === postArr[0].postUserId;
+    });
+
+    let reader = new FileReader();
+    reader.onload = function(event) {
+      let base64Image = event.target.result;
+
+      // Create an object to represent the new post
+      let newPost = {
+        postUserId: postUser.id,
+        textareaContent: textareaContent,
+        imageBase64: base64Image,
+      };
+
+      storedPosts.push(newPost); // Add the new post to the stored posts array
+
+      localStorage.setItem("posts", JSON.stringify(storedPosts)); // Store the updated posts array in local storage
+
+      renderPosts(); // Render the updated posts
+
+      let postSectionDiv = document.getElementById("post-box");
+      postSectionDiv.style.display = "none";
+
+      let overlay = document.getElementById("ovrlay");
+      overlay.style.display = "none";
+
+      // Reset the image input and textarea
+      imageInput.value = "";
+      textarea.value = "";
+    };
+    reader.readAsDataURL(selectedImage);
+  });
   
   
-  let selectedImage = imageInput.files[0];
-  let textareaContent = textarea.value;
-  
-  let postUser = userData.find(function(user) {
-return user.id === postArr[0].postUserId;
-});
-
-  // Create HTML markup for the post
-  let postMarkup = `
-    <div class="posts">
-      <div class="post-info">
-	   <div class="post-details">
-          <p>${postUser.id}</p>
-          <p>${postUser.userName}</p>
-          <p>${postUser.position}</p>
-        </div>
-        <div class="post-txt">
-          <p>${textareaContent}</p>
-        </div>
-        <div class="post-img">
-          <img src="${URL.createObjectURL(selectedImage)}" alt="">
-        </div>
-        <div class="post-actions">
-          <div class="reviews">
-		     <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-			 <button type="button" class="review-btn">Like</button>
-		   </div>
-		   
-		   <div class="reviews">
-		     <i class="fa fa-commenting-o" aria-hidden="true"></i>
-			 <button type="button" class="review-btn">Comment</button>
-		   </div>
-		   
-		   <div class="reviews">
-		     <i class="fa fa-retweet" aria-hidden="true"></i>
-			 <button type="button" class="review-btn">Repost</button>
-		   </div>
-		   
-		   <div class="reviews">
-		     <i class="fa fa-paper-plane" aria-hidden="true"></i>
-			 <button type="button" class="review-btn">Send</button>
-		   </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Append the post markup to the post-container
-  postContainer.innerHTML += postMarkup;
-
-
-let postSectionDiv = document.getElementById('post-box');
-  postSectionDiv.style.display = 'none';
-
-  
-  let overlay = document.getElementById('ovrlay');
-  overlay.style.display = 'none';
-  // Reset the image input and textarea
-  imageInput.value = "";
-  textarea.value = "";
-}); 
 }
 
+/******************************************************************************************************************************************/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
 
  //to show the typing password
 if(getUrl.includes("login.html")){
